@@ -19,7 +19,28 @@ const tabData = [
 ];
 
 function App() {
-return <h1>Tab Component : starter file</h1>
+  const [activeTab, setActiveTab] = useState(1);
+  const handlerActiveTab = (id) => setActiveTab(id);
+
+  return (
+    <div className="tab">
+      <div className="tab__header">
+        {tabData.map((item) => {
+          return (
+            <button
+              onClick={() => handlerActiveTab(item.id)}
+              key={item.id}
+              className={activeTab === item.id ? "active" : ""}
+            >
+              <span>{item.title}</span>
+              <span className="tab-indicator"></span>
+            </button>
+          );
+        })}
+      </div>
+      <div className="tab__content">{tabData[activeTab - 1].content}</div>
+    </div>
+  );
 }
 
 export default App;
